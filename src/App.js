@@ -1,7 +1,18 @@
-import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import DashboardContainer from "container/Dashbord";
+import TeamContainer from "container/Team";
 
-function App() {
-  return <h1 className="text-3xl font-bold underline"> Hello world! </h1>;
-}
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="dashboard" element={<DashboardContainer />} />
+        <Route path="team" element={<TeamContainer />} />
+        <Route path="/" element={<DashboardContainer />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
