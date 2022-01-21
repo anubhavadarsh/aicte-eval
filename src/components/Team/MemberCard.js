@@ -6,7 +6,7 @@ import { ReactComponent as InstagramIcon } from "assets/instagram-social-icon-gr
 const MemberCard = ({
   image,
   name,
-  desgination,
+  designation,
   about,
   twitter,
   instagram,
@@ -14,12 +14,12 @@ const MemberCard = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-center bg-white p-4 shadow rounded-lg">
-      <div className="inline-flex shadow-lg rounded-full overflow-hidden h-30 w-30">
-        <img src={image} alt="" className="h-full w-full" />
+      <div className="flex shadow-lg rounded-full overflow-hidden h-40 w-40">
+        <img src={image} alt="" className="h-full w-full object-cover" />
       </div>
 
       <h2 className="mt-4 font-bold text-xl text-black">{name}</h2>
-      <h6 className="mt-2 text-sm font-medium text-black">{desgination}</h6>
+      <h6 className="mt-2 text-sm font-medium text-black">{designation}</h6>
 
       <p className="text-xs text-black text-center mt-3">{about}</p>
 
