@@ -4,6 +4,16 @@ const teamSlice = createSlice({
   name: "team",
   initialState: {
     members: [],
+    category: {
+      sl: null,
+      category: null,
+      points: null,
+    },
+    activities: {
+      totalPoints: 0,
+      totalWeeks: 0,
+      activities: [],
+    },
   },
   reducers: {
     addMember(state, action) {
@@ -45,6 +55,42 @@ const teamSlice = createSlice({
           break;
         }
       }
+    },
+    addCategory(state, action) {
+      state.category.sl = action.payload.sl;
+      state.category.category = action.payload.category;
+      state.category.points = action.payload.points;
+    },
+    addActivity(state, action) {
+      const existingActivity = state.activities.activities.find(
+        (activity) => activity.sl === action.payload.sl
+      );
+
+      if (existingActivity) return;
+
+      state.activities.activities.push({
+        sl: action.payload.sl,
+        activity: action.payload.activity,
+        weeks: action.payload.weeks,
+        hours: action.payload.hours,
+        points: action.payload.points,
+      });
+
+      state.activities.totalPoints += action.payload.points;
+      state.activities.totalWeeks += action.payload.weeks;
+    },
+    removeActivity(state, action) {
+      state.activities.activities = state.activities.activities.filter(
+        (activity) => activity.sl !== action.payload.sl
+      );
+
+      state.activities.totalPoints -= action.payload.points;
+      state.activities.totalWeeks -= action.payload.weeks;
+    },
+    resetActivities(state) {
+      state.activities.activities = [];
+      state.activities.totalPoints = 0;
+      state.activities.totalWeeks = 0;
     },
   },
 });
