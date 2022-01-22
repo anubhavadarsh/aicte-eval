@@ -20,7 +20,7 @@ const ProgrammeTable = () => {
       <div className="container max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className="py-4">
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-            <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+            <div className="inline-block min-w-full shadow rounded-2xl overflow-hidden">
               <table className="min-w-full leading-normal bg-white">
                 <thead>
                   <HeaderRow headers={aictePointProgramme.headers} />
@@ -126,33 +126,31 @@ const BodyRow = ({
     });
   };
 
-  let selectedClasses = sl === selected?.sl ? "bg-green-200/75" : "bg-gray-200";
-
   return (
     <tr
       className={classNames(
-        sl === selected?.sl ? `bg-green-200/75` : "bg-white",
-        `transition ease-in-out delay-150 cursor-pointer hover:${selectedClasses} hover:-translate-y-1 duration-300 border-b  border-gray-200`
+        sl === selected?.sl ? `text-purple-900 bg-purple-100` : "bg-white",
+        `transition font-medium ease-in-out delay-150 cursor-pointer hover:bg-purple-200 hover:text-purple-900 hover:-translate-y-1 duration-300 border-b  border-gray-200`
       )}
       onClick={handleClick}
     >
       <td className="px-5 py-5 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{sl}</p>
+        <p className="whitespace-no-wrap">{sl}</p>
       </td>
       <td className="px-5 py-5 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{activityHead}</p>
+        <p className="whitespace-no-wrap">{activityHead}</p>
       </td>
       <td className="px-5 py-5 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{weeks}</p>
+        <p className="whitespace-no-wrap">{weeks}</p>
       </td>
       <td className="px-5 py-5 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{hours}</p>
+        <p className="whitespace-no-wrap">{hours}</p>
       </td>
       <td className="px-5 py-5 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{points}</p>
+        <p className="whitespace-no-wrap">{points}</p>
       </td>
       <td className="px-5 py-5 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{evaluated}</p>
+        <p className="whitespace-no-wrap">{evaluated}</p>
       </td>
     </tr>
   );

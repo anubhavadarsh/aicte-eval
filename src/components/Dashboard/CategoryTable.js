@@ -12,26 +12,24 @@ const CategoryTable = () => {
 
   return (
     <div className="container max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div className="py-4">
-        <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-          <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-            <table className="min-w-full leading-normal bg-white">
-              <thead>
-                <HeaderRow headers={aicteCategory.headers} />
-              </thead>
-              <tbody>
-                {aicteCategory.data.map((item) => (
-                  <BodyRow
-                    sl={item.sl}
-                    points={item.points}
-                    text={item.category}
-                    key={item.sl}
-                    selectedCategory={selectedCategory}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
+      <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 overflow-x-auto">
+        <div className="inline-block min-w-full shadow rounded-2xl overflow-hidden">
+          <table className="min-w-full leading-normal bg-white">
+            <thead>
+              <HeaderRow headers={aicteCategory.headers} />
+            </thead>
+            <tbody>
+              {aicteCategory.data.map((item) => (
+                <BodyRow
+                  sl={item.sl}
+                  points={item.points}
+                  text={item.category}
+                  key={item.sl}
+                  selectedCategory={selectedCategory}
+                />
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -79,25 +77,22 @@ const BodyRow = ({
     }
   };
 
-  let selectedClasses =
-    sl === selectedCategory ? "bg-green-200/75" : "bg-gray-200";
-
   return (
     <tr
       className={classNames(
-        sl === selectedCategory ? `bg-green-200/75` : "bg-white",
-        `transition ease-in-out delay-150 cursor-pointer hover:${selectedClasses} hover:-translate-y-1 duration-300 border-b  border-gray-200`
+        sl === selectedCategory ? `text-purple-900 bg-purple-100` : "bg-white",
+        `transition ease-in-out delay-150 cursor-pointer hover:bg-purple-200 hover:text-purple-900 font-medium hover:-translate-y-1 duration-250 border-b  border-gray-200`
       )}
       onClick={handleClick}
     >
       <td className="px-5 py-5 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{sl}</p>
+        <p className="whitespace-no-wrap">{sl}</p>
       </td>
       <td className="px-5 py-5 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{text}</p>
+        <p className="whitespace-no-wrap">{text}</p>
       </td>
       <td className="px-5 py-5 text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{points}</p>
+        <p className="whitespace-no-wrap">{points}</p>
       </td>
     </tr>
   );
