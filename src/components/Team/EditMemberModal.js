@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { toast } from "react-toastify";
-import { nanoid } from "nanoid/non-secure";
 import { getDownloadURL, ref, uploadBytes } from "@firebase/storage";
 import { useDispatch } from "react-redux";
 import { teamAction } from "store/teamSlice";
@@ -8,20 +7,26 @@ import { membersRef } from "config/firebase";
 import Backdrop from "components/UI/Backdrop";
 import ModalForm from "components/UI/ModalForm";
 
-const AddMemberModal = ({ setShowModal }) => {
-  const [name, setName] = useState("");
-  const [image, setImage] = useState("");
-  const [designation, setDesignation] = useState("");
-  const [about, setAbout] = useState("");
-  const [facebook, setFacebook] = useState("");
-  const [instagram, setInstagram] = useState("");
-  const [twitter, setTwitter] = useState("");
+const EditMemberModal = ({
+  inpId,
+  inpName,
+  inpImage,
+  inpDesignation,
+  inpAbout,
+  inpFacebook,
+  inpInstagram,
+  inpTwitter,
+  setShowModal,
+}) => {
+  const [name, setName] = useState(inpName);
+  const [image, setImage] = useState(inpImage);
+  const [designation, setDesignation] = useState(inpDesignation);
+  const [about, setAbout] = useState(inpAbout);
+  const [facebook, setFacebook] = useState(inpFacebook);
+  const [instagram, setInstagram] = useState(inpInstagram);
+  const [twitter, setTwitter] = useState(inpTwitter);
 
   const dispatch = useDispatch();
-
-  const memberRef = useRef({
-    id: nanoid(),
-  });
 
   const imageRef = useRef();
 
@@ -33,7 +38,7 @@ const AddMemberModal = ({ setShowModal }) => {
 
   const firebaseImageUpload = async (file) => {
     try {
-      const imageRef = ref(membersRef, memberRef.current.id);
+      const imageRef = ref(membersRef, inpId);
 
       await uploadBytes(imageRef, file);
       const url = await getDownloadURL(ref(imageRef));
@@ -58,7 +63,7 @@ const AddMemberModal = ({ setShowModal }) => {
     if (!formIsValid) return;
 
     const member = {
-      id: memberRef.current.id,
+      id: inpId,
       name,
       designation,
       about,
@@ -68,7 +73,7 @@ const AddMemberModal = ({ setShowModal }) => {
       instagram,
     };
 
-    dispatch(teamAction.addMember(member));
+    dispatch(teamAction.editMember(member));
     setShowModal(false);
   };
 
@@ -104,4 +109,4 @@ const AddMemberModal = ({ setShowModal }) => {
   );
 };
 
-export default AddMemberModal;
+export default EditMemberModal;

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
 import AddMember from "./AddMember";
 import AddMemberModal from "./AddMemberModal";
 import Card from "./MemberCard";
 
 const Team = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const members = useSelector((state) => state.team.members);
 
@@ -15,6 +14,7 @@ const Team = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         {members.map((member) => (
           <Card
+            id={member.id}
             name={member.name}
             about={member.about}
             designation={member.designation}
@@ -25,12 +25,14 @@ const Team = () => {
             key={member.id}
           />
         ))}
-        <AddMember setShowModal={setShowModal} />
+        <AddMember setShowModal={setShowAddModal} />
       </div>
-      {showModal && (
-        <AddMemberModal showModal={showModal} setShowModal={setShowModal} />
+      {showAddModal && (
+        <AddMemberModal
+          showModal={showAddModal}
+          setShowModal={setShowAddModal}
+        />
       )}
-      <ToastContainer />
     </>
   );
 };
