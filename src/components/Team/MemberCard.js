@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { teamAction } from "store/teamSlice";
 import { ReactComponent as FacebookIcon } from "assets/facebook-social-icon-gray.svg";
 import { ReactComponent as TwitterIcon } from "assets/twitter-social-icon-gray.svg";
 import { ReactComponent as InstagramIcon } from "assets/instagram-social-icon-gray.svg";
 import EditMemberModal from "./EditMemberModal";
+import useLongPress from "hooks/useLongPress";
+import MyPopover from "components/UI/Popover";
 
 const MemberCard = ({
   id,
@@ -16,16 +20,35 @@ const MemberCard = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const popoverRef = useRef();
+
+  const handleLongPress = () => {
+    dispatch(teamAction.removeMember({ id }));
+  };
+
   const handleClick = () => {
-    console.log("clicked");
     setShowModal(true);
   };
+
+  const defaultOptions = {
+    shouldPreventDefault: true,
+    delay: 700,
+  };
+
+  const longPressEvent = useLongPress(
+    handleLongPress,
+    handleClick,
+    defaultOptions
+  );
 
   return (
     <>
       <div
         className="flex flex-col items-center justify-center bg-white p-4 shadow rounded-lg"
-        onClick={handleClick}
+        {...longPressEvent}
+        onMouseEnter={() => popoverRef.current.click()}
       >
         <div className="flex shadow-lg rounded-full overflow-hidden h-40 w-40">
           <img src={image} alt="" className="h-full w-full object-cover" />
@@ -63,6 +86,7 @@ const MemberCard = ({
           </li>
         </ul>
       </div>
+      <MyPopover ref={popoverRef} />
       {showModal && (
         <EditMemberModal
           inpId={id}
