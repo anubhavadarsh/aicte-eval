@@ -103,11 +103,20 @@ const BodyRow = ({
           setShowAlert({
             show: true,
             message:
-              "Liked your spirit but please deselect one activity to continue!",
+              "Liked your spirit but please de-select one activity to continue!",
             color: "bg-slate-500",
           });
         } else {
-          const payload = { sl, weeks, hours, points, activity: activityHead };
+          const startTimeStamp = Date.now();
+
+          const payload = {
+            sl,
+            weeks,
+            hours,
+            points,
+            startTimeStamp,
+            activity: activityHead,
+          };
           dispatch(teamAction.addActivity(payload));
           setShowAlert({
             show: true,

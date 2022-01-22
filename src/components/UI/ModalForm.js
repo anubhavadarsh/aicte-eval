@@ -29,7 +29,7 @@ const ModalForm = ({
   buttonDisabled,
 }) => {
   return reactDom.createPortal(
-    <div className="absolute z-40 top-0 left-0 w-full min-h-screen flex items-center justify-center">
+    <div className="fixed z-40 top-0 left-0 w-full min-h-screen flex items-center justify-center">
       <div className="flex items-center justify-center">
         <form onSubmit={handleFormSubmit}>
           <div className="shadow sm:rounded-md sm:overflow-hidden">

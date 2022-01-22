@@ -74,6 +74,9 @@ const teamSlice = createSlice({
         weeks: action.payload.weeks,
         hours: action.payload.hours,
         points: action.payload.points,
+        startTimeStamp: action.payload.startTimeStamp,
+        members: [],
+        completed: 0,
       });
 
       state.activities.totalPoints += action.payload.points;
@@ -91,6 +94,29 @@ const teamSlice = createSlice({
       state.activities.activities = [];
       state.activities.totalPoints = 0;
       state.activities.totalWeeks = 0;
+    },
+    addMemberToAct(state, action) {
+      for (let activity of state.activities.activities) {
+        if (activity.sl === action.payload.sl) {
+          const existingMember = activity.members.find(
+            (member) => member.id === action.payload.member.id
+          );
+          if (existingMember) return;
+
+          activity.members.push(action.payload.member);
+          break;
+        }
+      }
+    },
+    remMemberToAct(state, action) {
+      for (let activity of state.activities.activities) {
+        if (activity.sl === action.payload.sl) {
+          activity.members = activity.members.filter(
+            (member) => member.id !== action.payload.id
+          );
+          break;
+        }
+      }
     },
   },
 });

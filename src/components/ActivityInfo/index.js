@@ -1,14 +1,26 @@
 import React from "react";
 import StatCard from "components/StatCard";
 import Controls from "./Controls";
+import getDate from "utils/getDate";
 
-const ActivityInfo = () => {
+const ActivityInfo = ({
+  sl,
+  weeks,
+  hours,
+  points,
+  startTimeStamp,
+  members,
+  completed,
+}) => {
   return (
     <>
       <div className="mb-4 relative sm:flex items-center justify-around">
-        <StatCard header={"26th Mar, 2016"} content={"started on"} />
-        <StatCard header={"7"} content={"members"} />
-        <StatCard header={"30%"} content={"completed"} />
+        <StatCard
+          header={`${getDate(startTimeStamp)}`}
+          content={"started on"}
+        />
+        <StatCard header={`${members.length}`} content={"members"} />
+        <StatCard header={`${completed}%`} content={"completed"} />
       </div>
       <p className="pb-2 text-sm text-gray-500 mt-4 xl:ml-5 sm:ml-2">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat
@@ -35,7 +47,7 @@ const ActivityInfo = () => {
         semper feugiat enim a sagittis.
       </p>
       <ImageGallery />
-      <Controls />
+      <Controls sl={sl} selectedMembers={members} />
     </>
   );
 };

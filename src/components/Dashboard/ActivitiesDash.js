@@ -13,7 +13,14 @@ const ActivitiesDash = () => {
         {activities.map((activity, index) => (
           <DisclosureItem
             classNames={index > 0 ? "mt-4" : ""}
+            sl={activity.sl}
             header={activity.activity}
+            weeks={activity.weeks}
+            hours={activity.hours}
+            points={activity.points}
+            startTimeStamp={activity.startTimeStamp}
+            members={activity.members}
+            completed={activity.completed}
             key={activity.sl}
           />
         ))}
@@ -22,7 +29,17 @@ const ActivitiesDash = () => {
   ) : null;
 };
 
-const DisclosureItem = ({ header, details, classNames }) => {
+const DisclosureItem = ({
+  sl,
+  header,
+  weeks,
+  hours,
+  points,
+  startTimeStamp,
+  members,
+  completed,
+  classNames,
+}) => {
   return (
     <Disclosure as="div" className={classNames}>
       {({ open }) => (
@@ -36,7 +53,15 @@ const DisclosureItem = ({ header, details, classNames }) => {
             />
           </Disclosure.Button>
           <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-            <ActivityInfo />
+            <ActivityInfo
+              sl={sl}
+              weeks={weeks}
+              hours={hours}
+              points={points}
+              startTimeStamp={startTimeStamp}
+              members={members}
+              completed={completed}
+            />
           </Disclosure.Panel>
         </>
       )}
